@@ -1,9 +1,6 @@
 
 SERVICES = {
-    "telegram_bot_rad": {
-        "description": "Telegram bot "
-    },
-    "nginx": {
-        "description": "Web server"
-    },
+    "agent_telegram_rad_bot": {
+        "description": "Telegram chat bot"
+    }
 }
