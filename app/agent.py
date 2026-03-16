@@ -17,10 +17,11 @@ def run_agent(user_input:str):
     # If tool requested
     if msg.tool_calls:
         try:
-            return execute_tools(msg.tool_calls)
+            return execute_tools(msg.tool_calls) or "Result is empty"
         except Exception as e:
-            print(f"\nError parsing tool calls: {e}")
-            return "Sorry I couldn't understand your query! please tell me again"
+            error = f"Error executing tools: {e}"
+            print(error)
+            return error
 
     return msg.content
 

@@ -35,7 +35,7 @@ def get_chat_history(user_id: str, limit: int = 100):
         content = r["content"]
 
         if role == "User":
-            history.append(f"{r["user_id"]}: {content}")
+            history.append(f"{r['user_id']}: {content}")
         else:
             history.append(f"assistant: {content}")
             history.append("")  # blank line between messages

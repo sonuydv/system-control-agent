@@ -2,10 +2,7 @@ from telegram import Update
 from telegram.ext import ContextTypes, ApplicationBuilder, MessageHandler, filters
 
 from agent import run_agent
-from sqlite_db import get_chat_history
 from env_helper import config
-
-# print(get_chat_history(config.TELEGRAM_ADMIN_USERNAME))
 
 async def reply(update:Update,context:ContextTypes.DEFAULT_TYPE):
     user = update.effective_user

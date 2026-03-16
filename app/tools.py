@@ -58,7 +58,7 @@ list services
 
 
 def get_rad_chats():
-    return get_chat_history(config.TELEGRAM_ADMIN_USERNAME)
+    return get_chat_history(config.TELEGRAM_ADMIN_USERNAME) or "no chat history found for rad bot"
 
 TOOLS = {
     "control_service": control_service,
