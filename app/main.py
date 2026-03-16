@@ -1,14 +1,11 @@
-import os
-
-from dotenv import load_dotenv
 from telegram import Update
 from telegram.ext import ContextTypes, ApplicationBuilder, MessageHandler, filters
 
 from agent import run_agent
+from sqlite_db import get_chat_history
+from env_helper import config
 
-
-# Load environment keys from .env to process env
-load_dotenv()
+# print(get_chat_history(config.TELEGRAM_ADMIN_USERNAME))
 
 async def reply(update:Update,context:ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
@@ -16,17 +13,14 @@ async def reply(update:Update,context:ContextTypes.DEFAULT_TYPE):
     user_id = user.id
     user_message = update.message.text
     print(f"User: ({user_id}:{user_name}) : {user_message}")
-    admin_id = os.getenv("TELEGRAM_ADMIN_ID")
-    admin_username = os.getenv("TELEGRAM_ADMIN_USERNAME")
-    if str(user_id) == admin_id and user_name == admin_username:
+    if str(user_id) == config.TELEGRAM_ADMIN_ID and user_name == config.TELEGRAM_ADMIN_USERNAME:
         response =  run_agent(user_message)
         await update.message.reply_text(response)
     else:
         await update.message.reply_text("Sorry, you are not authorized to use the agent.")
 
 
-TELEGRAM_BOT_KEY = os.getenv("TELEGRAM_BOT_TOKEN")
-app = ApplicationBuilder().token(TELEGRAM_BOT_KEY).build()
+app = ApplicationBuilder().token(config.TELEGRAM_BOT_TOKEN).build()
 
 handler = MessageHandler(filters.TEXT & ~filters.COMMAND,reply)
 app.add_handler(handler)

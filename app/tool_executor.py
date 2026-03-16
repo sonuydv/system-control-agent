@@ -24,7 +24,7 @@ def execute_tools(tool_calls):
 
         output = tool(**args)
 
-        results.append(f"{tool_name}:\n{output}")
+        results.append(f"{output}")
 
     return "\n\n".join(results)
 

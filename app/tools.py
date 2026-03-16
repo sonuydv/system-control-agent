@@ -1,5 +1,8 @@
+from env_helper import config
+from sqlite_db import get_chat_history
 from cmd_helpers import get_status, run_cmd
 from services import SERVICES
+
 
 
 def control_service(service, action):
@@ -34,7 +37,6 @@ def control_service(service, action):
 
     return f"{service} executed '{action}'. Current status: {final_status}"
 
-
 def list_services():
 
     services = "\n".join(SERVICES.keys())
@@ -53,9 +55,15 @@ disable <service>
 list services
 """
 
+
+
+def get_rad_chats():
+    return get_chat_history(config.TELEGRAM_ADMIN_USERNAME)
+
 TOOLS = {
     "control_service": control_service,
-    "list_services": list_services
+    "list_services": list_services,
+    "get_rad_chats": get_rad_chats
 }
 
 TOOLS_SCHEMA = [
@@ -82,6 +90,14 @@ TOOLS_SCHEMA = [
         "function": {
             "name": "list_services",
             "description": "List available services",
+            "parameters": {"type": "object", "properties": {}}
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_rad_chats",
+            "description": "Get recent chat history of rad bot",
             "parameters": {"type": "object", "properties": {}}
         }
     }

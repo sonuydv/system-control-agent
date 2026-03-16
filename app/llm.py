@@ -1,13 +1,9 @@
-from dotenv import load_dotenv
 from groq import Groq
-import os
 
-
-# Load environment keys from .env to process env
-load_dotenv()
+from env_helper import config
 
 client = Groq(
-    api_key=os.getenv("GROQ_API_KEY")
+    api_key=config.GROQ_API_KEY
 )
 
 def ask_llm(messages:str,tools_schema,tool_calls:str='auto'):
