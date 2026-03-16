@@ -1,0 +1,11 @@
+#Ignore virtual env files
+venv/*
+
+#ignore python output cache files
+__pycache__
+
+#ignore enviornment values
+*.env
+
+#ignore local data directory
+local/*
