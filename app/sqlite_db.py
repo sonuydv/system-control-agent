@@ -8,6 +8,13 @@ def get_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
+
+def clear_all_chats():
+    conn = sqlite3.connect(config.TELEGRAM_CHAT_HISTORY_DB_PATH)
+    conn.execute("DELETE FROM messages")
+    conn.commit()
+
+
 def get_chat_history(user_id: str, limit: int = 100):
 
     conn = get_connection()
