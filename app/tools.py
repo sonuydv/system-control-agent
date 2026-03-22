@@ -1,6 +1,5 @@
-from app.sqlite_db import clear_all_chats
 from env_helper import config
-from sqlite_db import get_chat_history
+from sqlite_db import get_chat_history,clear_all_messages
 from cmd_helpers import get_status, run_cmd
 from services import SERVICES
 
@@ -62,13 +61,13 @@ def get_rad_chats():
     return get_chat_history(config.TELEGRAM_ADMIN_USERNAME) or "no chat history found for rad bot"
 
 def clear_all_chats():
-    return  clear_all_chats()
+    return  clear_all_messages()
 
 TOOLS = {
     "control_service": control_service,
     "list_services": list_services,
     "get_rad_chats": get_rad_chats,
-    "clear_all_chats" : clear_all_chats()
+    "clear_all_chats" : clear_all_chats
 }
 
 TOOLS_SCHEMA = [

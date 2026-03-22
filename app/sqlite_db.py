@@ -9,7 +9,7 @@ def get_connection():
     return conn
 
 
-def clear_all_chats():
+def clear_all_messages():
     conn = sqlite3.connect(config.TELEGRAM_CHAT_HISTORY_DB_PATH)
     conn.execute("DELETE FROM messages")
     conn.commit()
